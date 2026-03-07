@@ -1,5 +1,9 @@
 streamlit
-PyPDF2
-langchain
-langchain-google-genai
-langchain-community
+pandas
+numpy
+scikit-learn
+xgboost
+imbalanced-learn
+joblib
+matplotlib
+seaborn
