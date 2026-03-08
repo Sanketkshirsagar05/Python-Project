@@ -11,7 +11,6 @@ st.title("💳 Credit Card Fraud Detection System")
 
 st.write("Enter transaction details to predict whether the transaction is Fraud or Legitimate.")
 
-# User Inputs
 amt = st.number_input("Transaction Amount", min_value=0.0)
 
 gender = st.selectbox("Gender", ["Male", "Female"])
@@ -94,3 +93,4 @@ if st.button("Predict Fraud"):
         st.error(f"⚠️ Fraudulent Transaction Detected (Probability: {probability:.2f})")
     else:
         st.success(f"✅ Legitimate Transaction (Fraud Probability: {probability:.2f})")
+
