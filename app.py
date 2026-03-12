@@ -10,7 +10,7 @@ from math import radians, sin, cos, sqrt, atan2
 # Paths
 # ------------------------------------
 
-data_path = r"C:\Users\sanke\OneDrive\Documents\Fraud Detection System\fraudTrain.csv"
+data_path = r"C:\Users\sanke\OneDrive\Documents\Fraud Detection System\Dataset\fraudTest.csv"
 
 pkl_path = r"C:\Users\sanke\OneDrive\Documents\Fraud Detection System\PKL Files"
 
