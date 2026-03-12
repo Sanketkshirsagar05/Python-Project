@@ -1,16 +1,28 @@
 import streamlit as st
 import pandas as pd
 import joblib
+import os
 
-model = joblib.load("fraud_model.pkl")
-scaler = joblib.load("scaler.pkl")
+# ------------------------------------
+# PKL folder path
+# ------------------------------------
+pkl_path = r"C:\Users\sanke\OneDrive\Documents\Fraud Detection System\PKL Files"
 
-merchant_encoder = joblib.load("merchant_encoder.pkl")
-category_encoder = joblib.load("category_encoder.pkl")
-city_encoder = joblib.load("city_encoder.pkl")
-state_encoder = joblib.load("state_encoder.pkl")
-job_encoder = joblib.load("job_encoder.pkl")
+# ------------------------------------
+# Load model and encoders
+# ------------------------------------
+model = joblib.load(os.path.join(pkl_path, "fraud_model.pkl"))
+scaler = joblib.load(os.path.join(pkl_path, "scaler.pkl"))
 
+merchant_encoder = joblib.load(os.path.join(pkl_path, "merchant_encoder.pkl"))
+category_encoder = joblib.load(os.path.join(pkl_path, "category_encoder.pkl"))
+city_encoder = joblib.load(os.path.join(pkl_path, "city_encoder.pkl"))
+state_encoder = joblib.load(os.path.join(pkl_path, "state_encoder.pkl"))
+job_encoder = joblib.load(os.path.join(pkl_path, "job_encoder.pkl"))
+
+# ------------------------------------
+# Streamlit UI
+# ------------------------------------
 st.title("💳 Credit Card Fraud Detection")
 
 merchant = st.selectbox("Merchant", merchant_encoder.classes_)
@@ -21,38 +33,43 @@ job = st.selectbox("Job", job_encoder.classes_)
 
 gender = st.selectbox("Gender", ["Male","Female"])
 
-amt = st.number_input("Transaction Amount",0.0)
+amt = st.number_input("Transaction Amount", 0.0)
 
-zip_code = st.number_input("Zip Code",0)
+zip_code = st.number_input("Zip Code", 0)
 
-city_pop = st.number_input("City Population",0)
+city_pop = st.number_input("City Population", 0)
 
-unix_time = st.number_input("Unix Time",0)
+unix_time = st.number_input("Unix Time", 0)
 
-hour = st.slider("Hour",0,23)
+hour = st.slider("Transaction Hour", 0, 23)
 
-day = st.slider("Day",1,31)
+day = st.slider("Day of Month", 1, 31)
 
-month = st.slider("Month",1,12)
+month = st.slider("Month", 1, 12)
 
-is_weekend = st.selectbox("Weekend",[0,1])
+is_weekend = st.selectbox("Weekend Transaction", [0,1])
 
-age = st.number_input("Age",18)
+age = st.number_input("Customer Age", 18)
 
-distance_km = st.number_input("Distance (km)",0.0)
+distance_km = st.number_input("Distance Between Customer & Merchant (km)", 0.0)
 
+# ------------------------------------
+# Encoding
+# ------------------------------------
 merchant = merchant_encoder.transform([merchant])[0]
 category = category_encoder.transform([category])[0]
 city = city_encoder.transform([city])[0]
 state = state_encoder.transform([state])[0]
 job = job_encoder.transform([job])[0]
 
-gender = 1 if gender=="Male" else 0
+gender = 1 if gender == "Male" else 0
 
+# ------------------------------------
+# Prediction
+# ------------------------------------
 if st.button("Predict Fraud"):
 
     input_data = pd.DataFrame([[
-
         merchant,
         category,
         amt,
@@ -69,9 +86,7 @@ if st.button("Predict Fraud"):
         is_weekend,
         age,
         distance_km
-
     ]], columns=[
-
         "merchant",
         "category",
         "amt",
@@ -88,15 +103,14 @@ if st.button("Predict Fraud"):
         "is_weekend",
         "age",
         "distance_km"
-
     ])
 
     input_scaled = scaler.transform(input_data)
 
     prediction = model.predict(input_scaled)[0]
-    prob = model.predict_proba(input_scaled)[0][1]
+    probability = model.predict_proba(input_scaled)[0][1]
 
     if prediction == 1:
-        st.error(f"⚠️ Fraud Detected | Probability {prob:.2f}")
+        st.error(f"⚠️ Fraudulent Transaction | Probability: {probability:.2f}")
     else:
-        st.success(f"✅ Legitimate Transaction | Fraud Probability {prob:.2f}")
+        st.success(f"✅ Legitimate Transaction | Fraud Probability: {probability:.2f}")
