@@ -3,26 +3,37 @@ import pandas as pd
 import joblib
 import os
 
+
 # ------------------------------------
-# PKL Folder Path
+# Models folder path
 # ------------------------------------
-pkl_path = r"\PKL Files"
+MODEL_PATH = "PKL Files"
 
 # ------------------------------------
 # Load Model and Scaler
 # ------------------------------------
-model = joblib.load(os.path.join(pkl_path, "fraud_model.pkl"))
-scaler = joblib.load(os.path.join(pkl_path, "scaler.pkl"))
+with open(os.path.join(MODEL_PATH, "fraud_model.pkl"), "rb") as f:
+    model = joblib.load(f)
 
-merchant_encoder = joblib.load(os.path.join(pkl_path, "merchant_encoder.pkl"))
-category_encoder = joblib.load(os.path.join(pkl_path, "category_encoder.pkl"))
-city_encoder = joblib.load(os.path.join(pkl_path, "city_encoder.pkl"))
-state_encoder = joblib.load(os.path.join(pkl_path, "state_encoder.pkl"))
-job_encoder = joblib.load(os.path.join(pkl_path, "job_encoder.pkl"))
+with open(os.path.join(MODEL_PATH, "scaler.pkl"), "rb") as f:
+    scaler = joblib.load(f)
 
-# ------------------------------------
+with open(os.path.join(MODEL_PATH, "merchant_encoder.pkl"), "rb") as f:
+    merchant_encoder = joblib.load(f)
+
+with open(os.path.join(MODEL_PATH, "category_encoder.pkl"), "rb") as f:
+    category_encoder = joblib.load(f)
+
+with open(os.path.join(MODEL_PATH, "city_encoder.pkl"), "rb") as f:
+    city_encoder = joblib.load(f)
+
+with open(os.path.join(MODEL_PATH, "state_encoder.pkl"), "rb") as f:
+    state_encoder = joblib.load(f)
+
+with open(os.path.join(MODEL_PATH, "job_encoder.pkl"), "rb") as f:
+    job_encoder = joblib.load(f)
+
 # App UI
-# ------------------------------------
 st.title("💳 Credit Card Fraud Detection System")
 
 st.write("Enter transaction details manually to predict fraud.")
@@ -55,9 +66,8 @@ age = st.number_input("Customer Age", 18)
 
 distance_km = st.number_input("Distance Between Customer & Merchant (km)", 0.0)
 
-# ------------------------------------
+
 # Encode Categorical Values
-# ------------------------------------
 merchant = merchant_encoder.transform([merchant])[0]
 category = category_encoder.transform([category])[0]
 city = city_encoder.transform([city])[0]
@@ -66,9 +76,8 @@ job = job_encoder.transform([job])[0]
 
 gender = 1 if gender == "Male" else 0
 
-# ------------------------------------
+
 # Prediction
-# ------------------------------------
 if st.button("Predict Fraud"):
 
     input_data = pd.DataFrame([[
