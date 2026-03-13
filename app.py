@@ -6,7 +6,7 @@ import os
 # ------------------------------------
 # PKL Folder Path
 # ------------------------------------
-pkl_path = r"C:\Users\sanke\OneDrive\Documents\Fraud Detection System\PKL Files"
+pkl_path = r"\PKL Files"
 
 # ------------------------------------
 # Load Model and Scaler
@@ -122,3 +122,4 @@ if st.button("Predict Fraud"):
         st.error(f"⚠️ Fraudulent Transaction Detected | Probability: {probability:.2f}")
     else:
         st.success(f"✅ Legitimate Transaction | Fraud Probability: {probability:.2f}")
+
