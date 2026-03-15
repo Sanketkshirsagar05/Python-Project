@@ -3,7 +3,7 @@ import pandas as pd
 import joblib
 import os
 
-# Models folder path
+
 MODEL_PATH = "PKL Files"
 
 # Load Model and Scaler
