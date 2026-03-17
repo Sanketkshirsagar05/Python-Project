@@ -15,9 +15,6 @@ This project builds an end-to-end fraud detection pipeline:
 
 ---
 
-
----
-
 ## ⚙️ Key Features
 - Feature engineering (age, time, distance between customer and merchant)
 - Imbalanced data handling with **SMOTE**
@@ -33,3 +30,15 @@ pip install -r requirements.txt
 
 Run the app:
 streamlit run app.py
+
+
+---
+
+## 🛠 Technologies Used
+- Python
+- Pandas & NumPy
+- Scikit-learn
+- XGBoost
+- Streamlit
+- Joblib
+
