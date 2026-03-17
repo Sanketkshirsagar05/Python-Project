@@ -29,3 +29,7 @@ This project builds an end-to-end fraud detection pipeline:
 ## ▶️ Run the Project
 
 Install dependencies:
+pip install -r requirements.txt
+
+Run the app:
+streamlit run app.py
