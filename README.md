@@ -15,4 +15,17 @@ This project builds an end-to-end fraud detection pipeline:
 
 ---
 
-## 📂 Project Structure
+
+---
+
+## ⚙️ Key Features
+- Feature engineering (age, time, distance between customer and merchant)
+- Imbalanced data handling with **SMOTE**
+- Fraud prediction using **XGBoost**
+- Interactive **Streamlit web app**
+
+---
+
+## ▶️ Run the Project
+
+Install dependencies:
