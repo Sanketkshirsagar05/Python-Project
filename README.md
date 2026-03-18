@@ -5,7 +5,7 @@ A Machine Learning project that detects **fraudulent credit card transactions** 
 ---
 
 ## 🚀 Live Demo
-👉 https://python-fraud-detection-system-2wtmmq3dfs6rvwiqmbaaws.streamlit.app/
+https://python-fraud-detection-system-2wtmmq3dfs6rvwiqmbaaws.streamlit.app/
 
 ---
 
