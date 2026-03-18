@@ -29,9 +29,7 @@ with open(os.path.join(MODEL_PATH, "job_encoder.pkl"), "rb") as f:
     job_encoder = joblib.load(f)
 
 # UI
-st.title("💳 Credit Card Fraud Detection System")
-
-st.write("Enter transaction details manually to predict fraud.")
+st.title("💳 Fraud Detection System")
 
 merchant = st.selectbox("Merchant", merchant_encoder.classes_)
 category = st.selectbox("Category", category_encoder.classes_)
